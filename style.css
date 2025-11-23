@@ -328,18 +328,16 @@ footer {
     margin-bottom: 18px;
 }
 
-/* Logo styling */
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Header title without logo */
+nav .logo {
     font-weight: 700;
-    font-size: 1.3rem;
+    /* Responsive font size: min 20px, preferred 5vw, max 32px */
+    font-size: clamp(20px, 5vw, 32px);
+    display: inline-block;
 }
 
-.logo-img {
-    height: 15px;      /* Adjust to match your text size */
-    width: auto;       /* Keeps correct aspect ratio */
-    border-radius: 4px; /* Optional: remove if you want square corners */
-    object-fit: contain;
+/* Remove the logo image */
+nav .logo img {
+    display: none;
 }
+
