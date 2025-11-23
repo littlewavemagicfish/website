@@ -1,0 +1,9 @@
+document.getElementById("newsletterForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const message = document.querySelector(".form-message");
+    message.textContent = "Thanks for joining the newsletter!";
+    message.style.color = "green";
+
+    this.reset();
+});

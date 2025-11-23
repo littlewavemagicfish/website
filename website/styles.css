@@ -1,0 +1,93 @@
+/* Color palette: ocean blues + sunset gold */
+:root {
+    --ocean-blue: #1e5f74;
+    --sunset-gold: #f7b733;
+    --sand: #fbe8c6;
+    --dark-blue: #122c34;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--sand);
+    color: var(--dark-blue);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: linear-gradient(to right, var(--ocean-blue), var(--sunset-gold));
+    color: white;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+nav ul li a.active {
+    text-decoration: underline;
+}
+
+.hero img.hero-main {
+    width: 100%;
+    height: auto;
+}
+
+.sub-heroes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.sub-heroes img {
+    width: 45%;
+    border-radius: 10px;
+}
+
+.purchase, .newsletter, .about {
+    padding: 40px;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background: var(--ocean-blue);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: var(--sunset-gold);
+    color: black;
+}
+
+form input {
+    width: 250px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--ocean-blue);
+}
+
+form button {
+    margin-top: 10px;
+}
+
+.form-message {
+    margin-top: 15px;
+    font-weight: bold;
+}
