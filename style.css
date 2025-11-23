@@ -338,7 +338,7 @@ footer {
 }
 
 .logo-img {
-    height: 32px;      /* Adjust to match your text size */
+    height: 15px;      /* Adjust to match your text size */
     width: auto;       /* Keeps correct aspect ratio */
     border-radius: 4px; /* Optional: remove if you want square corners */
     object-fit: contain;
