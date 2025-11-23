@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Little Wave & His Magic Fish</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header>
-    <nav>
-        <div class="logo">🌊 Little Wave & His Magic Fish</div>
-        <ul>
+<header class="header">
+    <nav class="nav">
+        <div class="logo">Little Wave & His Magic Fish</div>
+        <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
@@ -19,10 +19,12 @@
 </header>
 
 <section class="hero">
-    <img src="images/hero1.jpg" alt="Little Wave Hero" class="hero-main">
+    <img src="images/hero1.jpg" class="hero-img" alt="Little Wave Hero">
+
     <div class="hero-overlay">
         <h1>Ride the Waves of Imagination</h1>
         <p>Dive into the magical world of Little Wave & His Magic Fish!</p>
+
         <div class="buy-buttons">
             <a class="btn" href="YOUR_AMAZON_PAPERBACK_LINK" target="_blank">Buy Paperback</a>
             <a class="btn" href="YOUR_AMAZON_HARDCOVER_LINK" target="_blank">Buy Hardcover</a>
@@ -32,21 +34,17 @@
 
 <section class="newsletter">
     <h2>Join the Newsletter</h2>
-    <p>Be the first to get updates on new releases and magical adventures!</p>
+    <p>Stay updated with new releases, events, and magical adventures.</p>
+
     <form id="newsletterForm">
-        <div class="input-group">
-            <input type="text" name="firstName" placeholder="First Name" required>
-            <input type="text" name="lastName" placeholder="Last Name" required>
-        </div>
+        <input type="text" name="firstName" placeholder="First Name" required>
+        <input type="text" name="lastName" placeholder="Last Name" required>
         <input type="email" name="email" placeholder="Email Address" required>
         <button type="submit" class="btn">Join</button>
     </form>
+
     <p class="form-message"></p>
 </section>
-
-<footer>
-    <p>&copy; 2025 Little Wave & His Magic Fish</p>
-</footer>
 
 <script src="script.js"></script>
 </body>
