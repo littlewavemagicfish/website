@@ -12,22 +12,27 @@
     <nav>
         <h1 class="logo">Little Wave & His Magic Fish</h1>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
     </nav>
 </header>
 
 <section class="hero">
+    <div class="hero-text">
+        <h2>Ride the Waves of Imagination</h2>
+        <p>Dive into the magical world of Little Wave & His Magic Fish!</p>
+        <a href="#purchase" class="btn hero-btn">Get Your Copy</a>
+    </div>
     <img src="images/hero1.jpg" alt="Little Wave Hero" class="hero-main">
 </section>
 
 <section class="sub-heroes">
-    <img src="images/hero2.jpg" alt="Hero Image 2">
-    <img src="images/hero3.jpg" alt="Hero Image 3">
+    <div class="sub-hero-card"><img src="images/hero2.jpg" alt="Hero Image 2"></div>
+    <div class="sub-hero-card"><img src="images/hero3.jpg" alt="Hero Image 3"></div>
 </section>
 
-<section class="purchase">
+<section class="purchase" id="purchase">
     <h2>Buy the Book</h2>
     <p>Available in multiple formats on Amazon. Your reviews help spread the stoke!</p>
 
@@ -40,13 +45,19 @@
 <section class="newsletter">
     <h2>Join the Newsletter</h2>
     <form id="newsletterForm">
-        <input type="text" name="firstName" placeholder="First Name" required>
-        <input type="text" name="lastName" placeholder="Last Name" required>
+        <div class="input-group">
+            <input type="text" name="firstName" placeholder="First Name" required>
+            <input type="text" name="lastName" placeholder="Last Name" required>
+        </div>
         <input type="email" name="email" placeholder="Email Address" required>
         <button type="submit" class="btn">Join</button>
     </form>
     <p class="form-message"></p>
 </section>
+
+<footer>
+    <p>&copy; 2025 Little Wave & His Magic Fish</p>
+</footer>
 
 <script src="script.js"></script>
 </body>
