@@ -10,7 +10,7 @@
 
 <header>
     <nav>
-        <h1 class="logo">Little Wave & His Magic Fish</h1>
+        <div class="logo">🌊 Little Wave & His Magic Fish</div>
         <ul>
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -19,12 +19,15 @@
 </header>
 
 <section class="hero">
-    <div class="hero-text">
-        <h2>Ride the Waves of Imagination</h2>
-        <p>Dive into the magical world of Little Wave & His Magic Fish!</p>
-        <a href="#purchase" class="btn hero-btn">Get Your Copy</a>
-    </div>
     <img src="images/hero1.jpg" alt="Little Wave Hero" class="hero-main">
+    <div class="hero-overlay">
+        <h1>Ride the Waves of Imagination</h1>
+        <p>Dive into the magical world of Little Wave & His Magic Fish!</p>
+        <div class="buy-buttons">
+            <a class="btn" href="YOUR_AMAZON_PAPERBACK_LINK" target="_blank">Buy Paperback</a>
+            <a class="btn" href="YOUR_AMAZON_HARDCOVER_LINK" target="_blank">Buy Hardcover</a>
+        </div>
+    </div>
 </section>
 
 <section class="sub-heroes">
@@ -32,18 +35,9 @@
     <div class="sub-hero-card"><img src="images/hero3.jpg" alt="Hero Image 3"></div>
 </section>
 
-<section class="purchase" id="purchase">
-    <h2>Buy the Book</h2>
-    <p>Available in multiple formats on Amazon. Your reviews help spread the stoke!</p>
-
-    <div class="buy-buttons">
-        <a class="btn" href="YOUR_AMAZON_PAPERBACK_LINK" target="_blank">Buy Paperback</a>
-        <a class="btn" href="YOUR_AMAZON_HARDCOVER_LINK" target="_blank">Buy Hardcover</a>
-    </div>
-</section>
-
 <section class="newsletter">
     <h2>Join the Newsletter</h2>
+    <p>Be the first to get updates on new releases and magical adventures!</p>
     <form id="newsletterForm">
         <div class="input-group">
             <input type="text" name="firstName" placeholder="First Name" required>
