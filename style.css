@@ -295,3 +295,12 @@ footer {
         width: 170px;
     }
 }
+
+.author-photo {
+    max-width: 260px;   /* adjust as you like */
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    margin: 0 auto;
+}
