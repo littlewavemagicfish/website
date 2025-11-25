@@ -1,30 +1,30 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpSMOOhzI_L7u7P82ydtGgOgShOuBZR4gFVXbGxextIK6hLlFJmQj5ngxVWQ6VM71NZw/exec";
+// =====================================
+
+// Newsletter form -> Google Sheet submit
+
+// =====================================
+ 
+// IMPORTANT: paste your Apps Script Web App URL here (NO trailing quotes!)
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxFSW8lYZKXMhcMmNf_XmaF-HC-ugp7kKZ94wg_JbBIsBNeMz-IqTZkfArX6-lBMpOlTA/exec";
  
 document.addEventListener("DOMContentLoaded", () => {
 
-  console.log("NEW script.js loaded v2");
- 
   const form = document.getElementById("newsletterForm");
 
   const message = document.querySelector(".form-message");
  
   if (!form) {
 
-    console.warn("newsletterForm not found");
+    console.warn("newsletterForm not found.");
 
     return;
 
   }
  
-  // Nuke any inline onsubmit just in case
-
-  form.onsubmit = null;
- 
-  form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", async function (e) {
 
     e.preventDefault();
-
-    e.stopPropagation();
  
     const payload = {
 
@@ -36,57 +36,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     };
  
-    console.log("submit fired, about to fetch", payload);
- 
     message.textContent = "Submitting...";
 
     message.style.color = "#f7b733";
  
     try {
 
-      const res = await fetch(SCRIPT_URL, {
+      // no-cors avoids preflight/CORS blocks.
+
+      await fetch(SCRIPT_URL, {
 
         method: "POST",
 
-        mode: "cors",
+        mode: "no-cors",
 
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
 
         body: JSON.stringify(payload)
 
       });
  
-      console.log("fetch response status", res.status);
+      // If fetch doesn't throw, we assume success.
+
+      message.textContent = "🎉 Thanks for joining the newsletter!";
+
+      message.style.color = "#f7b733";
+
+      form.reset();
  
-      const result = await res.json();
-
-      console.log("result", result);
- 
-      if (result.ok) {
-
-        message.textContent = "🎉 Thanks for joining the newsletter!";
-
-        form.reset();
-
-      } else {
-
-        message.textContent = "❌ Error: " + (result.error || "Unknown error");
-
-        message.style.color = "red";
-
-      }
-
     } catch (err) {
 
-      console.error(err);
+      console.error("Newsletter submit failed:", err);
 
-      message.textContent = "❌ Network error: " + err.message;
+      message.textContent = "❌ Sorry — something went wrong. Please try again.";
 
       message.style.color = "red";
 
     }
 
   });
+ 
+ 
+  // -----------------------------
+
+  // Fade-in Scroll Effect (yours)
+
+  // -----------------------------
+
+  const fadeElements = document.querySelectorAll(".sub-hero-card, .newsletter");
+ 
+  const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      if (entry.isIntersecting) entry.target.classList.add("fade-in");
+
+    });
+
+  }, { threshold: 0.2 });
+ 
+  fadeElements.forEach(el => observer.observe(el));
 
 });
 
