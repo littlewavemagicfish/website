@@ -1,96 +1,93 @@
-// -----------------------------
-
-// Newsletter Form → Google Sheet
-
-// -----------------------------
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpSMOOhzI_L7u7P82ydtGgOgShOuBZR4gFVXbGxextIK6hLlFJmQj5ngxVWQ6VM71NZw/exec";
  
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxt-jnR_6b6GoHbHgksDqKkzgo31ziZbjbdku8kpZYJfS-Gct7IzH26ov50LEeWAtgH/exec";
+document.addEventListener("DOMContentLoaded", () => {
+
+  console.log("NEW script.js loaded v2");
  
-document.getElementById("newsletterForm").addEventListener("submit", async function(e) {
+  const form = document.getElementById("newsletterForm");
+
+  const message = document.querySelector(".form-message");
+ 
+  if (!form) {
+
+    console.warn("newsletterForm not found");
+
+    return;
+
+  }
+ 
+  // Nuke any inline onsubmit just in case
+
+  form.onsubmit = null;
+ 
+  form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
- 
-    const message = document.querySelector(".form-message");
- 
-    // Grab form values
 
+    e.stopPropagation();
+ 
     const payload = {
 
-        firstName: this.firstName.value.trim(),
+      firstName: form.firstName.value.trim(),
 
-        lastName: this.lastName.value.trim(),
+      lastName: form.lastName.value.trim(),
 
-        email: this.email.value.trim()
+      email: form.email.value.trim()
 
     };
  
-    // Show temporary status
-
+    console.log("submit fired, about to fetch", payload);
+ 
     message.textContent = "Submitting...";
 
-    message.style.color = "#f7b733";  // your existing color
+    message.style.color = "#f7b733";
  
     try {
 
-        const response = await fetch(SCRIPT_URL, {
+      const res = await fetch(SCRIPT_URL, {
 
-            method: "POST",
+        method: "POST",
 
-            headers: { "Content-Type": "application/json" },
+        mode: "cors",
 
-            body: JSON.stringify(payload)
+        headers: { "Content-Type": "application/json" },
 
-        });
+        body: JSON.stringify(payload)
+
+      });
  
-        const result = await response.json();
+      console.log("fetch response status", res.status);
  
-        if (result.ok) {
+      const result = await res.json();
 
-            message.textContent = "🎉 Thanks for joining the newsletter!";
-
-            this.reset();
-
-        } else {
-
-            message.textContent = "❌ Error: " + (result.error || "Unknown error");
-
-            message.style.color = "red";
-
-        }
+      console.log("result", result);
  
-    } catch (err) {
+      if (result.ok) {
 
-        message.textContent = "❌ Network error: " + err.message;
+        message.textContent = "🎉 Thanks for joining the newsletter!";
+
+        form.reset();
+
+      } else {
+
+        message.textContent = "❌ Error: " + (result.error || "Unknown error");
 
         message.style.color = "red";
 
+      }
+
+    } catch (err) {
+
+      console.error(err);
+
+      message.textContent = "❌ Network error: " + err.message;
+
+      message.style.color = "red";
+
     }
 
+  });
+
 });
- 
- 
-// -----------------------------
-
-// Fade-in Scroll Effect
-
-// -----------------------------
- 
-const fadeElements = document.querySelectorAll('.sub-hero-card, .newsletter');
- 
-const observer = new IntersectionObserver(entries => {
-
-    entries.forEach(entry => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add('fade-in');
-
-        }
-
-    });
-
-}, { threshold: 0.2 });
- 
-fadeElements.forEach(el => observer.observe(el));
 
  
