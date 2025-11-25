@@ -2,21 +2,15 @@
 
 // Newsletter form -> Google Sheet submit
 
+// (reliable, CORS-proof)
+
 // =====================================
  
-// IMPORTANT: Paste your Apps Script Web App URL here (NO trailing quotes!)
-
 const SCRIPT_URL =
 
-  "https://script.google.com/macros/s/AKfycbxuJNFYi3M3NQ9y2IpzeWUd1_cRuAJqGAhN9D3IEnCssS8UeRak7WT595jeW2Z5-i7-Uw/exec";
+  "https://script.google.com/macros/s/AKfycbyrZB2CT8VYw6jNAPS6hna3Mz99hqfAd8X8gWL03SxWSK8Lt344L7aFdOn5TaqwfDLXNw/exec";
  
 document.addEventListener("DOMContentLoaded", () => {
-
-  // -----------------------------
-
-  // Newsletter Form Handler
-
-  // -----------------------------
 
   const form = document.getElementById("newsletterForm");
 
@@ -28,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   } else {
 
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", (e) => {
 
       e.preventDefault();
 
@@ -40,7 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const email     = form.elements["email"]?.value.trim() || "";
  
-      const payload = { firstName, lastName, email };
+      const params = new URLSearchParams({
+
+        firstName,
+
+        lastName,
+
+        email
+
+      });
  
       if (messageEl) {
 
@@ -50,11 +52,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
       }
  
-      try {
+      // Prefer sendBeacon (super reliable for no-cors POST)
 
-        // no-cors avoids preflight/CORS blocks.
+      let sent = false;
 
-        await fetch(SCRIPT_URL, {
+      if (navigator.sendBeacon) {
+
+        sent = navigator.sendBeacon(SCRIPT_URL, params);
+
+      }
+ 
+      // Fallback to fetch(no-cors) if beacon not supported or fails
+
+      if (!sent) {
+
+        fetch(SCRIPT_URL, {
 
           method: "POST",
 
@@ -62,41 +74,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
           headers: {
 
-            "Content-Type": "text/plain;charset=utf-8"
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
 
           },
 
-          body: JSON.stringify(payload)
+          body: params.toString()
+
+        }).catch((err) => {
+
+          console.error("Newsletter submit failed:", err);
+
+          if (messageEl) {
+
+            messageEl.textContent =
+
+              "❌ Sorry — something went wrong. Please try again.";
+
+            messageEl.style.color = "red";
+
+          }
+
+          return;
 
         });
- 
-        // If fetch doesn't throw, assume success.
-
-        if (messageEl) {
-
-          messageEl.textContent = "🎉 Thanks for joining the newsletter!";
-
-          messageEl.style.color = "#f7b733";
-
-        }
-
-        form.reset();
-
-      } catch (err) {
-
-        console.error("Newsletter submit failed:", err);
-
-        if (messageEl) {
-
-          messageEl.textContent =
-
-            "❌ Sorry — something went wrong. Please try again.";
-
-          messageEl.style.color = "red";
-
-        }
 
       }
+ 
+      // We can’t read the response in no-cors mode,
+
+      // so show success immediately.
+
+      if (messageEl) {
+
+        messageEl.textContent = "🎉 Thanks for joining the newsletter!";
+
+        messageEl.style.color = "#f7b733";
+
+      }
+
+      form.reset();
 
     });
 
@@ -104,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
   // -----------------------------
 
-  // Fade-in Scroll Effect
+  // Fade-in Scroll Effect (yours)
 
   // -----------------------------
 
@@ -118,11 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         entries.forEach((entry) => {
 
-          if (entry.isIntersecting) {
-
-            entry.target.classList.add("fade-in");
-
-          }
+          if (entry.isIntersecting) entry.target.classList.add("fade-in");
 
         });
 
@@ -131,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { threshold: 0.2 }
 
     );
- 
+
     fadeElements.forEach((el) => observer.observe(el));
 
   }
