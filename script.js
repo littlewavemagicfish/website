@@ -4,7 +4,7 @@
 // =====================================
 
 const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbyP5_vLC1RrVS18nxzHitUuEwqNCbFxD2ybkSEJmi-xcZshMgjL4zGmL84ibHRBog2j6A/exec";
+  "https://script.google.com/macros/s/AKfycbx3crsHnII7o6d1XHa-V30025ruT_Nx_V6dgdFCrYon6-MMIMQaxS61YqrvCGXrDllaMA/exec";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("newsletterForm");
